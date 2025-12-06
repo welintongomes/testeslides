@@ -822,35 +822,36 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: 0 40px;
+    padding: 0 40px; /* espaço para as setas */
 }
 
 .slider-track {
     display: flex;
-    transition: transform 0.4s ease-in-out;
-    width: 100%;
+    transition: transform 0.3s ease;
+    gap: 10px; /* espaço entre slides */
 }
 
 .slide-item {
-    flex-shrink: 0;
-    width: calc(33.333% - 10px);
-    margin-right: 10px;
-    box-sizing: border-box;
+    min-width: calc(33.333% - 10px);
+    position: relative;
+    cursor: pointer;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+        flex: 0 0 calc(33.333% - 10px); /* 3 slides no desktop */
+    min-width: 0; /* importante para flex funcionar */
 }
 
 .slide-item:hover {
     transform: scale(1.05);
 }
 
-.slide-item:last-child {
-    margin-right: 0;
-}
-
 .slide-item img {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    border-radius: 15px;
+    display: block;
 }
 
 .slide-caption {
@@ -918,62 +919,31 @@ body {
     transform: scale(1.3);
 }
 
-
-/* SMARTPHONE - CORREÇÃO PRINCIPAL */
 @media (max-width: 768px) {
+    .slide-item {
+        flex: 0 0 calc(100% - 10px); /* 1 slide por vez no mobile */
+    }
+    
     .slider-container {
         padding: 0 35px;
-        margin: 0;
     }
-    
-    .slider-track {
-        gap: 0; /* SEM ESPAÇO entre slides no mobile */
-    }
-    
-    .slide-item {
-        width: 100%; /* OCUPA 100% EXATO */
-        margin-right: 0;
-        padding: 0 5px; /* Pequeno padding interno */
-        box-sizing: border-box;
-    }
-    
-    .slide-item img {
-        height: 200px;
-    }
-}
-.works-slider {
-    margin: 5px 0;
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
-    padding: 11px 2px;
 }
 
-/* ADICIONE ISSO */
-.slider-track {
-    display: flex;
-    transition: transform 0.4s ease-in-out;
-    will-change: transform; /* Melhora a performance */
-}
-
-@media (max-width: 768px) {
-    .slider-track {
-        /* Cada slide ocupa exatamente a largura do container */
-        width: auto !important;
-    }
-    
+@media (max-width: 480px) {
     .slide-item {
         min-width: 100%;
-        max-width: 100%;
-        flex: 0 0 100%;
+    }
+    
+    .slider-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
     }
 }
-
 /* TABLET */
 @media (min-width: 769px) and (max-width: 1024px) {
     .slide-item {
-        width: calc(50% - 5px);
+        flex: 0 0 calc(50% - 10px); /* 2 slides no tablet */
     }
 }
     </style>
@@ -1353,14 +1323,14 @@ let slidesPerView = 3;
 let autoSlideInterval;
 
 function updateSlidesPerView() {
-    // No mobile, sempre 1 slide por vez
-    // Isso garante alinhamento perfeito
-    if (window.innerWidth <= 768) {
-        slidesPerView = 1;
-    } else if (window.innerWidth <= 1024) {
-        slidesPerView = 2;
+    const width = window.innerWidth;
+    
+    if (width <= 768) {
+        slidesPerView = 1; // 1 slide no mobile
+    } else if (width <= 1024) {
+        slidesPerView = 2; // 2 slides no tablet
     } else {
-        slidesPerView = 3;
+        slidesPerView = 3; // 3 slides no desktop
     }
 }
 
@@ -1370,22 +1340,19 @@ function renderSlider() {
     
     if (!track || sliderImages.length === 0) return;
     
-    // Renderizar slides - ALTERAÇÃO AQUI
+    // Renderizar slides
     track.innerHTML = sliderImages.map((img, index) => `
-        <div class="slide-item">
+        <div class="slide-item" onclick="openModal('${img.src}', '${img.caption}')">
             <img src="${img.src}" alt="${img.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
             <div class="slide-caption">${img.caption}</div>
         </div>
     `).join('');
     
-    // Força o track a ter a largura correta
-    track.style.width = `${sliderImages.length * 100}%`;
-    
-    // Renderizar dots
-    const totalDots = sliderImages.length; // 1 dot por imagem no mobile
-    dots.innerHTML = Array.from({ length: totalDots }, (_, i) => 
-        `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
-    ).join('');
+// Renderizar dots
+const totalDots = getTotalSlides();
+dots.innerHTML = Array.from({ length: totalDots }, (_, i) => 
+    `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
+).join('');
     
     updateSlidePosition();
 }
@@ -1394,8 +1361,8 @@ function updateSlidePosition() {
     const track = document.getElementById('sliderTrack');
     if (!track) return;
     
-    // Calcula o deslocamento baseado no slide atual
-    const offset = -currentSlide * 100; // Move 100% por slide
+    const slideWidth = 100; // cada slide ocupa 100% do container visível
+    const offset = -currentSlide * slideWidth;
     track.style.transform = `translateX(${offset}%)`;
     
     // Atualizar dots
@@ -1410,7 +1377,7 @@ function getTotalSlides() {
 }
 
 function moveSlide(direction) {
-    const maxSlide = sliderImages.length - 1; // Total de imagens menos 1
+    const maxSlide = getTotalSlides() - 1;
     currentSlide += direction;
     
     if (currentSlide < 0) {
