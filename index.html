@@ -15,12 +15,12 @@
             box-sizing: border-box;
         }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 12px;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 12px;
+        }
 
         .container {
             max-width: 1200px;
@@ -473,17 +473,17 @@ body {
             overflow: hidden;
         }
 
-.gallery-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 8px 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    transition: background 0.3s ease;
-}
+        .gallery-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
 
         .gallery-header:hover {
             background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
@@ -800,166 +800,297 @@ body {
                 padding: 15px;
             }
         }
+
         /* ==================== SLIDER DE TRABALHOS ==================== */
-.works-slider {
-    margin: 5px 0;
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
-    padding: 11px 2px;
-}
+        .works-slider {
+            margin: 5px 0;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 11px 2px;
+        }
 
-.works-slider h2 {
-    text-align: center;
-    color: white;
-    margin-bottom: 6px;
-    font-size: 23px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-}
+        .works-slider h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 6px;
+            font-size: 23px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-.slider-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    padding: 0 40px; /* espaço para as setas */
-}
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
 
-.slider-track {
-    display: flex;
-    transition: transform 0.3s ease;
-    gap: 10px; /* espaço entre slides */
-}
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 15px;
+        }
 
-.slide-item {
-    min-width: calc(33.333% - 10px);
-    position: relative;
-    cursor: pointer;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
-        flex: 0 0 calc(33.333% - 10px); /* 3 slides no desktop */
-    min-width: 0; /* importante para flex funcionar */
-}
+        .slide-item {
+            min-width: calc(33.333% - 10px);
+            position: relative;
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
 
-.slide-item:hover {
-    transform: scale(1.05);
-}
+        .slide-item:hover {
+            transform: scale(1.05);
+        }
 
-.slide-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-}
+        .slide-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
 
-.slide-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    color: white;
-    padding: 20px 15px 15px;
-    font-size: 14px;
-    font-weight: 500;
-}
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+            padding: 20px 15px 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
 
-.slider-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.9);
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
 
-.slider-nav:hover {
-    background: white;
-    transform: translateY(-50%) scale(1.1);
-}
+        .slider-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
 
-.slider-nav.prev {
-    left: 10px;
-}
+        .slider-nav.prev {
+            left: 10px;
+        }
 
-.slider-nav.next {
-    right: 10px;
-}
+        .slider-nav.next {
+            right: 10px;
+        }
 
-.slider-dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.4);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.dot.active {
-    background: white;
-    transform: scale(1.3);
-}
+        .dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
 
-@media (max-width: 768px) {
-    .slide-item {
-        flex: 0 0 calc(100% - 10px); /* 1 slide por vez no mobile */
-    }
-    
-    .slider-container {
-        padding: 0 35px;
-    }
-}
+        @media (max-width: 768px) {
+            .slide-item {
+                min-width: calc(50% - 7.5px);
+            }
 
-@media (max-width: 480px) {
-    .slide-item {
-        min-width: 100%;
-    }
-    
-    .slider-nav {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-    }
-}
-/* TABLET */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .slide-item {
-        flex: 0 0 calc(50% - 10px); /* 2 slides no tablet */
-    }
-}
+            .slide-item img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-item {
+                min-width: 100%;
+            }
+
+            .slider-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
+
+        /* ==================== VÍDEO DESTACADO ==================== */
+        .video-section {
+            margin: 20px auto;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .video-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding: 30px;
+            background: #f5f5f5;
+        }
+
+        .video-player {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .video-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .video-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .video-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .video-btn.fullscreen {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        @media (max-width: 768px) {
+            .video-controls {
+                flex-direction: column;
+            }
+
+            .video-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Vídeo no slider */
+        .slide-video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            opacity: 0.8;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .slide-item:hover .video-play-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Vídeo na galeria */
+        .gallery-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-video-item {
+            position: relative;
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            color: white;
+            opacity: 1;
+            pointer-events: none;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .gallery-video-item:hover .video-play-overlay {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        .gallery-video-item:hover .gallery-video {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
 <body>
-        <!-- SLIDER DE ÚLTIMOS TRABALHOS -->
-<div class="works-slider">
-    <h2>🌟 Últimos Trabalhos</h2>
-    <div class="slider-container">
-        <button class="slider-nav prev" onclick="moveSlide(-1)">‹</button>
-        <div class="slider-track" id="sliderTrack"></div>
-        <button class="slider-nav next" onclick="moveSlide(1)">›</button>
+    <!-- SLIDER DE ÚLTIMOS TRABALHOS -->
+    <div class="works-slider">
+        <h2>🌟 Últimos Trabalhos</h2>
+        <div class="slider-container">
+            <button class="slider-nav prev" onclick="moveSlide(-1)">‹</button>
+            <div class="slider-track" id="sliderTrack"></div>
+            <button class="slider-nav next" onclick="moveSlide(1)">›</button>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
     </div>
-    <div class="slider-dots" id="sliderDots"></div>
-</div>
+
 
     <!-- GALERIA DE TRABALHOS -->
     <section class="gallery-section">
@@ -1111,7 +1242,8 @@ body {
                 name: '✨ Polimento e Cristalização',
                 images: [
                     { src: './polimento1.jpg', caption: 'Polimento Técnico - Sedan Preto' },
-                    { src: './polimento2.jpg', caption: 'Cristalização Completa - SUV Branco' }
+                    { src: './polimento2.jpg', caption: 'Cristalização Completa - SUV Branco' },
+                    { src: './seu-video.mp4', caption: '🎬 Veja nosso trabalho em ação!', type: 'video' }
                     //{ src: './polimento3.jpg', caption: 'Polimento + Cristalização - Hatch' }
                 ]
             },
@@ -1191,16 +1323,39 @@ body {
         <div class="gallery-category">
             <div class="category-header" onclick="toggleCategory('${category.id}')">
                 <h3>${category.name}</h3>
-                <span class="category-count">${category.images.length} ${category.images.length === 1 ? 'foto' : 'fotos'}</span>
+                <span class="category-count">${category.images.length} ${category.images.length === 1 ? 'item' : 'itens'}</span>
                 <span class="category-arrow" id="arrow-${category.id}">▼</span>
             </div>
             <div class="category-images" id="category-${category.id}">
-                ${category.images.map(img => `
-                    <div class="gallery-item" onclick="openModal('${img.src}', '${img.caption}')">
-                        <img src="${img.src}" alt="${img.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
-                        <div class="gallery-item-caption">${img.caption}</div>
-                    </div>
-                `).join('')}
+                ${category.images.map((item, index) => {
+                if (item.type === 'video') {
+                    return `
+                            <div class="gallery-item gallery-video-item" 
+                                 onclick="openVideoFullscreen('${item.src}', '${item.caption}')"
+                                 onmouseenter="playGalleryVideo(this)"
+                                 onmouseleave="pauseGalleryVideo(this)">
+                                <video 
+                                    class="gallery-video" 
+                                    src="${item.src}" 
+                                    muted 
+                                    loop 
+                                    playsinline
+                                    preload="metadata"
+                                    onerror="this.parentElement.style.display='none'"
+                                ></video>
+                                <div class="gallery-item-caption">${item.caption}</div>
+                                <div class="video-play-overlay">▶️</div>
+                            </div>
+                        `;
+                } else {
+                    return `
+                            <div class="gallery-item" onclick="openModal('${item.src}', '${item.caption}')">
+                                <img src="${item.src}" alt="${item.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                                <div class="gallery-item-caption">${item.caption}</div>
+                            </div>
+                        `;
+                }
+            }).join('')}
             </div>
         </div>
     `).join('');
@@ -1309,118 +1464,137 @@ body {
         let showAllProducts = false;
 
         // ==================== SLIDER DE TRABALHOS ====================
-const sliderImages = [
-    { src: './trabalho1.jpg', caption: 'Polimento Técnico - Resultado Incrível' },
-    { src: './polimento2.jpg', caption: 'Cristalização Premium - Brilho Espelhado' },
-    { src: './trabalho6.jpg', caption: 'Lavagem Completa - Carro Impecável' },
-    { src: './lavagem2.jpg', caption: 'Lavagem + Cera - Proteção Total' },
-    { src: './interna1.jpg', caption: 'Higienização Interna - Conforto Renovado' },
-    { src: './motor1.jpg', caption: 'Lavagem de Motor - Como Novo' }
-];
+        // coloque na pasta guithub as imagens que quer que apareça nos ultimos trabalhos slides
+        const sliderImages = [
+            { src: './trabalho1.jpg', caption: 'Polimento Técnico - Resultado Incrível' },
+            { src: './seu-video.mp4', caption: '🎬 Veja nosso trabalho em ação!', type: 'video' }
+            // { src: './polimento2.jpg', caption: 'Cristalização Premium - Brilho Espelhado' },
+            // { src: './trabalho6.jpg', caption: 'Lavagem Completa - Carro Impecável' },
+            // { src: './lavagem2.jpg', caption: 'Lavagem + Cera - Proteção Total' },
+            // { src: './interna1.jpg', caption: 'Higienização Interna - Conforto Renovado' },
+            // { src: './motor1.jpg', caption: 'Lavagem de Motor - Como Novo' }
+        ];
 
-let currentSlide = 0;
-let slidesPerView = 3;
-let autoSlideInterval;
+        let currentSlide = 0;
+        let slidesPerView = 3;
+        let autoSlideInterval;
 
-function updateSlidesPerView() {
-    const width = window.innerWidth;
-    
-    if (width <= 768) {
-        slidesPerView = 1; // 1 slide no mobile
-    } else if (width <= 1024) {
-        slidesPerView = 2; // 2 slides no tablet
-    } else {
-        slidesPerView = 3; // 3 slides no desktop
-    }
-}
+        function updateSlidesPerView() {
+            if (window.innerWidth <= 480) {
+                slidesPerView = 1;
+            } else if (window.innerWidth <= 768) {
+                slidesPerView = 2;
+            } else {
+                slidesPerView = 3;
+            }
+        }
 
-function renderSlider() {
-    const track = document.getElementById('sliderTrack');
-    const dots = document.getElementById('sliderDots');
-    
-    if (!track || sliderImages.length === 0) return;
-    
-    // Renderizar slides
-    track.innerHTML = sliderImages.map((img, index) => `
-        <div class="slide-item" onclick="openModal('${img.src}', '${img.caption}')">
-            <img src="${img.src}" alt="${img.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
-            <div class="slide-caption">${img.caption}</div>
-        </div>
-    `).join('');
-    
-// Renderizar dots
-const totalDots = getTotalSlides();
-dots.innerHTML = Array.from({ length: totalDots }, (_, i) => 
-    `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
-).join('');
-    
-    updateSlidePosition();
-}
+        function renderSlider() {
+            const track = document.getElementById('sliderTrack');
+            const dots = document.getElementById('sliderDots');
 
-function updateSlidePosition() {
-    const track = document.getElementById('sliderTrack');
-    if (!track) return;
-    
-    const slideWidth = 100; // cada slide ocupa 100% do container visível
-    const offset = -currentSlide * slideWidth;
-    track.style.transform = `translateX(${offset}%)`;
-    
-    // Atualizar dots
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-    });
-}
+            if (!track || sliderImages.length === 0) return;
 
-function getTotalSlides() {
-    // Retorna o número total de grupos de slides baseado no slidesPerView
-    return Math.ceil(sliderImages.length / slidesPerView);
-}
+            // Renderizar slides (imagens e vídeos)
+            track.innerHTML = sliderImages.map((item, index) => {
+                if (item.type === 'video') {
+                    return `
+                <div class="slide-item" onclick="openVideoFullscreen('${item.src}', '${item.caption}')">
+                    <video 
+                        class="slide-video" 
+                        src="${item.src}" 
+                        muted 
+                        autoplay 
+                        loop 
+                        playsinline
+                        onerror="this.parentElement.style.display='none'"
+                    ></video>
+                    <div class="slide-caption">${item.caption}</div>
+                    <div class="video-play-icon">▶️</div>
+                </div>
+            `;
+                } else {
+                    return `
+                <div class="slide-item" onclick="openModal('${item.src}', '${item.caption}')">
+                    <img src="${item.src}" alt="${item.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <div class="slide-caption">${item.caption}</div>
+                </div>
+            `;
+                }
+            }).join('');
 
-function moveSlide(direction) {
-    const maxSlide = getTotalSlides() - 1;
-    currentSlide += direction;
-    
-    if (currentSlide < 0) {
-        currentSlide = maxSlide;
-    } else if (currentSlide > maxSlide) {
-        currentSlide = 0;
-    }
-    
-    updateSlidePosition();
-    resetAutoSlide();
-}
+            // Renderizar dots baseado nas posições possíveis
+            const maxPosition = Math.max(0, sliderImages.length - slidesPerView);
+            const totalDots = maxPosition + 1;
+            dots.innerHTML = Array.from({ length: totalDots }, (_, i) =>
+                `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
+            ).join('');
 
-function goToSlide(index) {
-    currentSlide = index;
-    updateSlidePosition();
-    resetAutoSlide();
-}
+            updateSlidePosition();
+        }
 
-function startAutoSlide() {
-    autoSlideInterval = setInterval(() => {
-        moveSlide(1);
-    }, 5000); // Muda a cada 5 segundos
-}
+        function updateSlidePosition() {
+            const track = document.getElementById('sliderTrack');
+            if (!track) return;
 
-function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    startAutoSlide();
-}
+            const slideWidth = track.firstElementChild ? track.firstElementChild.offsetWidth : 0;
+            const gap = 15; // mesmo valor do CSS
+            const offset = -(currentSlide * (slideWidth + gap));
+            track.style.transform = `translateX(${offset}px)`;
 
-// Atualizar slides ao redimensionar
-window.addEventListener('resize', () => {
-    updateSlidesPerView();
-    currentSlide = 0;
-    updateSlidePosition();
-});
+            // Atualizar dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            const totalSlides = sliderImages.length;
+            const maxSlide = Math.max(0, totalSlides - slidesPerView);
+
+            currentSlide += direction;
+
+            if (currentSlide < 0) {
+                currentSlide = maxSlide;
+            } else if (currentSlide > maxSlide) {
+                currentSlide = 0;
+            }
+
+            updateSlidePosition();
+            resetAutoSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlidePosition();
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                moveSlide(1);
+            }, 5000); // Muda a cada 5 segundos
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        // Atualizar slides ao redimensionar
+        window.addEventListener('resize', () => {
+            updateSlidesPerView();
+            currentSlide = 0;
+            updateSlidePosition();
+        });
 
         // ==================== INICIALIZAÇÃO ====================
         async function init() {
             await initDB();
-                setupDateInput();
-    updateSlidesPerView();
-    renderSlider();
-    startAutoSlide(); // <-- ADICIONAR
+            setupDateInput();
+            updateSlidesPerView();
+            renderSlider();
+            startAutoSlide(); // <-- ADICIONAR
             renderServices();
             renderProducts();
             updateSummary();
@@ -2064,6 +2238,123 @@ window.addEventListener('resize', () => {
             renderServices();
             renderProducts();
             updateSummary();
+        }
+        // ==================== CONTROLES DE VÍDEO ====================
+        function playPauseVideo() {
+            const video = document.getElementById('mainVideo');
+            const icon = document.getElementById('playPauseIcon');
+
+            if (video.paused) {
+                video.play();
+                icon.textContent = '⏸️';
+            } else {
+                video.pause();
+                icon.textContent = '▶️';
+            }
+        }
+
+        function toggleFullscreen() {
+            const video = document.getElementById('mainVideo');
+
+            if (!document.fullscreenElement) {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        function restartVideo() {
+            const video = document.getElementById('mainVideo');
+            video.currentTime = 0;
+            video.play();
+            document.getElementById('playPauseIcon').textContent = '⏸️';
+        }
+
+        // Atualizar ícone quando o vídeo terminar
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('mainVideo');
+            if (video) {
+                video.addEventListener('ended', () => {
+                    document.getElementById('playPauseIcon').textContent = '▶️';
+                });
+
+                video.addEventListener('play', () => {
+                    document.getElementById('playPauseIcon').textContent = '⏸️';
+                });
+
+                video.addEventListener('pause', () => {
+                    document.getElementById('playPauseIcon').textContent = '▶️';
+                });
+            }
+        });
+        // ==================== VÍDEO EM TELA CHEIA ====================
+        function openVideoFullscreen(src, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+
+            // Criar elemento de vídeo
+            const videoElement = document.createElement('video');
+            videoElement.src = src;
+            videoElement.controls = true;
+            videoElement.autoplay = true;
+            videoElement.className = 'modal-content';
+            videoElement.id = 'modalVideo';
+
+            // Substituir imagem por vídeo
+            modalImg.style.display = 'none';
+            modalImg.parentNode.insertBefore(videoElement, modalImg);
+
+            modal.style.display = 'block';
+            modalCaption.textContent = caption;
+
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Atualizar função closeModal para remover vídeo
+        const originalCloseModal = closeModal;
+        closeModal = function () {
+            const modalVideo = document.getElementById('modalVideo');
+            if (modalVideo) {
+                modalVideo.pause();
+                modalVideo.remove();
+            }
+            const modalImg = document.getElementById('modalImage');
+            modalImg.style.display = 'block';
+
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // ==================== CONTROLE DE VÍDEO NA GALERIA ====================
+        function playGalleryVideo(element) {
+            const video = element.querySelector('.gallery-video');
+            const overlay = element.querySelector('.video-play-overlay');
+
+            if (video) {
+                video.play().catch(err => console.log('Erro ao reproduzir:', err));
+                if (overlay) overlay.style.opacity = '0';
+            }
+        }
+
+        function pauseGalleryVideo(element) {
+            const video = element.querySelector('.gallery-video');
+            const overlay = element.querySelector('.video-play-overlay');
+
+            if (video) {
+                video.pause();
+                video.currentTime = 0; // Volta ao início
+                if (overlay) overlay.style.opacity = '1';
+            }
         }
 
         // ==================== INICIAR ====================
