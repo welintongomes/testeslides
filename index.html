@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento - Lavagem e Polimento</title>
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%234CAF50'/%3E%3Cpath d='M16 16h16v4H16zM16 24h16v4H16zM16 32h12v4H16z' fill='white'/%3E%3C/svg%3E">
@@ -1081,179 +1081,6 @@
         .gallery-video-item:hover .gallery-video {
             transform: scale(1.1);
         }
-
-        /* Modal de Imagem e Vídeo */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 85vh;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: zoomIn 0.3s;
-            border-radius: 8px;
-        }
-
-        /* VÍDEO NO MODAL - SEM BORDAS PRETAS */
-        #modalVideo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 95vw;
-            height: 85vh;
-            max-width: 95vw;
-            max-height: 85vh;
-            object-fit: contain;
-            background: black;
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-
-            to {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-            z-index: 10000;
-        }
-
-        .modal-close:hover {
-            color: #667eea;
-        }
-
-        .modal-caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            color: #ccc;
-            padding: 20px;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.1rem;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            z-index: 10001;
-        }
-
-        /* Vídeo no slider - SEM bordas pretas */
-        .slide-video {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-            background: black;
-        }
-
-        /* Vídeo na galeria - SEM bordas pretas */
-        .gallery-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-            background: black;
-        }
-
-        /* RESPONSIVO MOBILE - VÍDEO GRANDE */
-        @media (max-width: 768px) {
-            .slide-video {
-                height: 200px;
-                object-fit: cover;
-            }
-
-            #modalVideo {
-                width: 100vw !important;
-                height: 90vh !important;
-                max-width: 100vw !important;
-                max-height: 90vh !important;
-                object-fit: contain !important;
-                top: 50% !important;
-                left: 50% !important;
-                transform: translate(-50%, -50%) !important;
-            }
-
-            .modal-content {
-                max-width: 95%;
-                max-height: 80vh;
-            }
-
-            .modal-close {
-                top: 10px;
-                right: 20px;
-                font-size: 40px;
-                background: rgba(0, 0, 0, 0.5);
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .modal-caption {
-                font-size: 0.9rem;
-                padding: 10px;
-                bottom: 10px;
-                width: 90%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #modalVideo {
-                width: 100vw !important;
-                height: 95vh !important;
-                max-width: 100vw !important;
-                max-height: 95vh !important;
-            }
-
-            .modal-close {
-                top: 5px;
-                right: 10px;
-                font-size: 35px;
-                width: 45px;
-                height: 45px;
-            }
-        }
     </style>
 </head>
 
@@ -1649,7 +1476,7 @@
             { src: './trabalho3.jpg', caption: 'Polimento Técnico - Resultado Incrível' },
 
             { src: './seu-video.mp4', caption: '🎬 Veja nosso trabalho em ação!', type: 'video' },
-
+            
             // { src: './polimento2.jpg', caption: 'Cristalização Premium - Brilho Espelhado' },
             // { src: './trabalho6.jpg', caption: 'Lavagem Completa - Carro Impecável' },
             // { src: './lavagem2.jpg', caption: 'Lavagem + Cera - Proteção Total' },
@@ -2478,81 +2305,39 @@
             }
         });
         // ==================== VÍDEO EM TELA CHEIA ====================
-        // ==================== VÍDEO EM TELA CHEIA ====================
         function openVideoFullscreen(src, caption) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             const modalCaption = document.getElementById('modalCaption');
-
-            // Remover vídeo anterior se existir
-            const oldVideo = document.getElementById('modalVideo');
-            if (oldVideo) {
-                oldVideo.remove();
-            }
 
             // Criar elemento de vídeo
             const videoElement = document.createElement('video');
             videoElement.src = src;
             videoElement.controls = true;
             videoElement.autoplay = true;
-            videoElement.playsInline = true; // Importante para iOS não forçar fullscreen
+            videoElement.className = 'modal-content';
             videoElement.id = 'modalVideo';
 
-            // Estilos inline para garantir
-            videoElement.style.position = 'absolute';
-            videoElement.style.top = '50%';
-            videoElement.style.left = '50%';
-            videoElement.style.transform = 'translate(-50%, -50%)';
-            videoElement.style.objectFit = 'contain';
-            videoElement.style.background = 'black';
-
-            // Detectar se é mobile
-            const isMobile = window.innerWidth <= 768;
-
-            if (isMobile) {
-                videoElement.style.width = '100vw';
-                videoElement.style.height = '90vh';
-                videoElement.style.maxWidth = '100vw';
-                videoElement.style.maxHeight = '90vh';
-            } else {
-                videoElement.style.width = '95vw';
-                videoElement.style.height = '85vh';
-                videoElement.style.maxWidth = '95vw';
-                videoElement.style.maxHeight = '85vh';
-            }
-
-            // Esconder imagem e adicionar vídeo
+            // Substituir imagem por vídeo
             modalImg.style.display = 'none';
-            modal.appendChild(videoElement);
+            modalImg.parentNode.insertBefore(videoElement, modalImg);
 
             modal.style.display = 'block';
             modalCaption.textContent = caption;
-            modalCaption.style.zIndex = '10001';
 
             document.body.style.overflow = 'hidden';
-
-            // Play automático
-            setTimeout(() => {
-                videoElement.play().catch(err => {
-                    console.log('Autoplay bloqueado, clique para reproduzir');
-                });
-            }, 100);
         }
 
         // Atualizar função closeModal para remover vídeo
         const originalCloseModal = closeModal;
-        // Atualizar função closeModal
         closeModal = function () {
             const modalVideo = document.getElementById('modalVideo');
             if (modalVideo) {
                 modalVideo.pause();
                 modalVideo.remove();
             }
-
             const modalImg = document.getElementById('modalImage');
-            if (modalImg) {
-                modalImg.style.display = 'block';
-            }
+            modalImg.style.display = 'block';
 
             const modal = document.getElementById('imageModal');
             modal.style.display = 'none';
