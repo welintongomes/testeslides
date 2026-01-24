@@ -1124,6 +1124,36 @@
                 object-fit: contain;
             }
         }
+
+        /* Botão de tela cheia para vídeos */
+        .fullscreen-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(118, 75, 162, 0.9);
+            transform: scale(1.1);
+        }
+
+        .fullscreen-btn.show {
+            display: flex;
+        }
     </style>
 </head>
 
@@ -2348,6 +2378,7 @@
             }
         });
         // ==================== VÍDEO EM TELA CHEIA ====================
+        // ==================== VÍDEO EM TELA CHEIA ====================
         function openVideoFullscreen(src, caption) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
@@ -2360,6 +2391,32 @@
             videoElement.autoplay = true;
             videoElement.className = 'modal-content';
             videoElement.id = 'modalVideo';
+            videoElement.style.objectFit = 'contain';
+
+            // Criar botão de tela cheia
+            let fullscreenBtn = document.getElementById('fullscreenBtn');
+            if (!fullscreenBtn) {
+                fullscreenBtn = document.createElement('button');
+                fullscreenBtn.id = 'fullscreenBtn';
+                fullscreenBtn.className = 'fullscreen-btn';
+                fullscreenBtn.innerHTML = '⛶';
+                fullscreenBtn.title = 'Tela Cheia';
+                document.body.appendChild(fullscreenBtn);
+            }
+
+            fullscreenBtn.onclick = () => {
+                if (videoElement.requestFullscreen) {
+                    videoElement.requestFullscreen();
+                } else if (videoElement.webkitRequestFullscreen) {
+                    videoElement.webkitRequestFullscreen();
+                } else if (videoElement.webkitEnterFullscreen) {
+                    videoElement.webkitEnterFullscreen();
+                } else if (videoElement.msRequestFullscreen) {
+                    videoElement.msRequestFullscreen();
+                }
+            };
+
+            fullscreenBtn.classList.add('show');
 
             // Substituir imagem por vídeo
             modalImg.style.display = 'none';
@@ -2369,16 +2426,53 @@
             modalCaption.textContent = caption;
 
             document.body.style.overflow = 'hidden';
+
+            // Tentar abrir em tela cheia automaticamente após 200ms
+            setTimeout(() => {
+                if (videoElement.requestFullscreen) {
+                    videoElement.requestFullscreen().catch(err => {
+                        console.log('Clique no botão para tela cheia');
+                    });
+                } else if (videoElement.webkitRequestFullscreen) {
+                    videoElement.webkitRequestFullscreen();
+                } else if (videoElement.webkitEnterFullscreen) {
+                    videoElement.webkitEnterFullscreen();
+                }
+            }, 200);
+
+            // Esconder botão quando estiver em fullscreen
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    fullscreenBtn.classList.remove('show');
+                } else {
+                    fullscreenBtn.classList.add('show');
+                }
+            });
         }
 
         // Atualizar função closeModal para remover vídeo
-        const originalCloseModal = closeModal;
         closeModal = function () {
+            // Esconder botão de tela cheia
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            if (fullscreenBtn) {
+                fullscreenBtn.classList.remove('show');
+            }
+
+            // Sair do fullscreen
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+
             const modalVideo = document.getElementById('modalVideo');
             if (modalVideo) {
                 modalVideo.pause();
                 modalVideo.remove();
             }
+
             const modalImg = document.getElementById('modalImage');
             modalImg.style.display = 'block';
 
