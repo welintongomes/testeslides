@@ -1081,6 +1081,23 @@
         .gallery-video-item:hover .gallery-video {
             transform: scale(1.1);
         }
+
+        #modalVideo {
+            width: 100% !important;
+            height: auto !important;
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        @media (max-width: 768px) and (orientation: portrait) {
+            #modalVideo {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                height: auto !important;
+                max-height: 50vh;
+            }
+        }
     </style>
 </head>
 
@@ -2318,6 +2335,12 @@
             videoElement.autoplay = true;
             videoElement.className = 'modal-content';
             videoElement.id = 'modalVideo';
+
+            // ADICIONE ESTAS LINHAS:
+            videoElement.style.width = '100%';
+            videoElement.style.height = 'auto';
+            videoElement.style.maxHeight = '90vh';
+            videoElement.style.objectFit = 'contain';
 
             // Substituir imagem por vídeo
             modalImg.style.display = 'none';
