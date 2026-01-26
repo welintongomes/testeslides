@@ -1158,14 +1158,14 @@
         </div>
     </section>
 
-    <!-- MODAL DE IMAGEM -->
-    <div class="image-modal" id="imageModal" onclick="closeModalClick(event)">
-        <span class="modal-close">&times;</span>
-        <button class="modal-nav-arrow left" onclick="event.stopPropagation(); navigateModal(-1)">‹</button>
-        <img class="modal-content" id="modalImage">
-        <button class="modal-nav-arrow right" onclick="event.stopPropagation(); navigateModal(1)">›</button>
-        <div class="modal-caption" id="modalCaption"></div>
-    </div>
+<!-- MODAL DE IMAGEM -->
+<div class="image-modal" id="imageModal" onclick="closeModalClick(event)">
+    <span class="modal-close" onclick="event.stopPropagation(); closeModal()">&times;</span>
+    <button class="modal-nav-arrow left" onclick="event.stopPropagation(); navigateModal(-1)">‹</button>
+    <img class="modal-content" id="modalImage">
+    <button class="modal-nav-arrow right" onclick="event.stopPropagation(); navigateModal(1)">›</button>
+    <div class="modal-caption" id="modalCaption"></div>
+</div>
 
     <div class="container">
         <div class="header">
@@ -1366,18 +1366,14 @@
         }
 
         function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
+            const grid = document.getElementById('galleryGrid');
 
-    if (galleryCategories.length === 0) {
-        grid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px; grid-column: 1/-1;">📷 Em breve adicionaremos fotos dos nossos trabalhos!</p>';
-        return;
-    }
+            if (galleryCategories.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px; grid-column: 1/-1;">📷 Em breve adicionaremos fotos dos nossos trabalhos!</p>';
+                return;
+            }
 
-    grid.innerHTML = galleryCategories.map(category => {
-        // Contar apenas imagens (sem vídeos) para índice correto
-        let imageOnlyIndex = 0;
-        
-        return `
+            grid.innerHTML = galleryCategories.map(category => `
         <div class="gallery-category">
             <div class="category-header" onclick="toggleCategory('${category.id}')">
                 <h3>${category.name}</h3>
@@ -1386,8 +1382,8 @@
             </div>
             <div class="category-images" id="category-${category.id}">
                 ${category.images.map((item, index) => {
-                    if (item.type === 'video') {
-                        return `
+                if (item.type === 'video') {
+                    return `
                             <div class="gallery-item gallery-video-item" 
                                  onclick="openVideoFullscreen('${item.src}', '${item.caption}')"
                                  onmouseenter="playGalleryVideo(this)"
@@ -1405,20 +1401,19 @@
                                 <div class="video-play-overlay">▶️</div>
                             </div>
                         `;
-                    } else {
-                        return `
-                            <div class="gallery-item" onclick="openModal('${item.src}', '${item.caption}', '${category.id}')">
+                } else {
+                    return `
+                            <div class="gallery-item" onclick="openModal('${item.src}', '${item.caption}', '${category.id}', ${index})">
                                 <img src="${item.src}" alt="${item.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
                                 <div class="gallery-item-caption">${item.caption}</div>
                             </div>
                         `;
-                    }
-                }).join('')}
+                }
+            }).join('')}
             </div>
         </div>
-    `;
-    }).join('');
-}
+    `).join('');
+        }
 
         function openModal(src, caption, categoryId = null) {
             const modal = document.getElementById('imageModal');
@@ -1583,17 +1578,17 @@ function closeModal() {
             }
         }
 
-        function renderSlider() {
-            const track = document.getElementById('sliderTrack');
-            const dots = document.getElementById('sliderDots');
+function renderSlider() {
+    const track = document.getElementById('sliderTrack');
+    const dots = document.getElementById('sliderDots');
 
-            if (!track || sliderImages.length === 0) return;
+    if (!track || sliderImages.length === 0) return;
 
-            // Renderizar slides (imagens e vídeos)
-            track.innerHTML = sliderImages.map((item, index) => {
-                if (item.type === 'video') {
-                    return `
-                <div class="slide-item" onclick="openVideoFullscreen('${item.src}', '${item.caption}')">
+    // Renderizar slides (imagens e vídeos)
+    track.innerHTML = sliderImages.map((item, index) => {
+        if (item.type === 'video') {
+            return `
+                <div class="slide-item" onclick="openVideoFullscreen('${item.src}', '${item.caption}', true)">
                     <video 
                         class="slide-video" 
                         src="${item.src}" 
@@ -1607,25 +1602,25 @@ function closeModal() {
                     <div class="video-play-icon">▶️</div>
                 </div>
             `;
-                } else {
-                    return `
-                <div class="slide-item" onclick="openModal('${item.src}', '${item.caption}')">
+        } else {
+            return `
+                <div class="slide-item" onclick="openModalFromSlider('${item.src}', '${item.caption}')">
                     <img src="${item.src}" alt="${item.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
                     <div class="slide-caption">${item.caption}</div>
                 </div>
             `;
-                }
-            }).join('');
-
-            // Renderizar dots baseado nas posições possíveis
-            const maxPosition = Math.max(0, sliderImages.length - slidesPerView);
-            const totalDots = maxPosition + 1;
-            dots.innerHTML = Array.from({ length: totalDots }, (_, i) =>
-                `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
-            ).join('');
-
-            updateSlidePosition();
         }
+    }).join('');
+
+    // Renderizar dots baseado nas posições possíveis
+    const maxPosition = Math.max(0, sliderImages.length - slidesPerView);
+    const totalDots = maxPosition + 1;
+    dots.innerHTML = Array.from({ length: totalDots }, (_, i) =>
+        `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
+    ).join('');
+
+    updateSlidePosition();
+}
 
         function updateSlidePosition() {
             const track = document.getElementById('sliderTrack');
@@ -1681,6 +1676,14 @@ function closeModal() {
             currentSlide = 0;
             updateSlidePosition();
         });
+
+        function openModalFromSlider(src, caption) {
+    currentCategoryImages = sliderImages;
+    currentModalIndex = sliderImages.findIndex(img => img.src === src);
+    if (currentModalIndex === -1) currentModalIndex = 0;
+    
+    openModal(src, caption);
+}
 
         // ==================== INICIALIZAÇÃO ====================
         async function init() {
@@ -2404,28 +2407,35 @@ function closeModal() {
             }
         });
         // ==================== VÍDEO EM TELA CHEIA ====================
-        function openVideoFullscreen(src, caption) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            const modalCaption = document.getElementById('modalCaption');
+function openVideoFullscreen(src, caption, fromSlider = false) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
 
-            // Criar elemento de vídeo
-            const videoElement = document.createElement('video');
-            videoElement.src = src;
-            videoElement.controls = true;
-            videoElement.autoplay = true;
-            videoElement.className = 'modal-content';
-            videoElement.id = 'modalVideo';
+    // Se for do slider, configurar array de navegação
+    if (fromSlider) {
+        currentCategoryImages = sliderImages;
+        currentModalIndex = sliderImages.findIndex(img => img.src === src);
+        if (currentModalIndex === -1) currentModalIndex = 0;
+    }
 
-            // Substituir imagem por vídeo
-            modalImg.style.display = 'none';
-            modalImg.parentNode.insertBefore(videoElement, modalImg);
+    // Criar elemento de vídeo
+    const videoElement = document.createElement('video');
+    videoElement.src = src;
+    videoElement.controls = true;
+    videoElement.autoplay = true;
+    videoElement.className = 'modal-content';
+    videoElement.id = 'modalVideo';
 
-            modal.style.display = 'block';
-            modalCaption.textContent = caption;
+    // Substituir imagem por vídeo
+    modalImg.style.display = 'none';
+    modalImg.parentNode.insertBefore(videoElement, modalImg);
 
-            document.body.style.overflow = 'hidden';
-        }
+    modal.style.display = 'block';
+    modalCaption.textContent = caption;
+
+    document.body.style.overflow = 'hidden';
+}
 
         // Atualizar função closeModal para remover vídeo
         const originalCloseModal = closeModal;
