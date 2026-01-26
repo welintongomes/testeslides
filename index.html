@@ -604,18 +604,16 @@
 
         #modalVideo {
             width: auto !important;
-            height: 85vh !important;
-            max-width: 100%;
-            object-fit: contain;
-            background: black;
+            max-width: 95vw !important;
+            max-height: 85vh !important;
+            width: auto !important;
+            height: auto !important;
         }
 
         @media (max-width: 768px) {
             #modalVideo {
-                width: 100% !important;
-                height: auto !important;
-                max-height: 80vh !important;
-                object-fit: contain;
+                max-width: 100vw !important;
+                max-height: 90vh !important;
             }
         }
 
@@ -2325,6 +2323,7 @@
             }
         });
         // ==================== VÍDEO EM TELA CHEIA ====================
+
         function openVideoFullscreen(src, caption) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
@@ -2335,8 +2334,20 @@
             videoElement.src = src;
             videoElement.controls = true;
             videoElement.autoplay = true;
-            videoElement.className = 'modal-content';
             videoElement.id = 'modalVideo';
+
+            // ESTILOS INLINE FORÇADOS:
+            videoElement.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 95vw;
+        max-height: 85vh;
+        width: auto;
+        height: auto;
+        border-radius: 8px;
+    `;
 
             // Substituir imagem por vídeo
             modalImg.style.display = 'none';
