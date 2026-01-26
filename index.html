@@ -1072,14 +1072,11 @@
 
         /* Vídeo no slider */
         .slide-video {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    object-position: center; /* ADICIONE */
-}
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
 
         .video-play-icon {
             position: absolute;
@@ -1625,41 +1622,36 @@ function renderSlider() {
     updateSlidePosition();
 }
 
-function updateSlidePosition() {
-    const track = document.getElementById('sliderTrack');
-    if (!track) return;
+        function updateSlidePosition() {
+            const track = document.getElementById('sliderTrack');
+            if (!track) return;
 
-    const slideWidth = track.firstElementChild ? track.firstElementChild.offsetWidth : 0;
-    const gap = 15;
-    const offset = -(currentSlide * (slideWidth + gap));
-    
-    // Remover transição temporariamente se for loop (do último para o primeiro ou vice-versa)
-    const maxSlide = Math.max(0, sliderImages.length - slidesPerView);
-    
-    track.style.transform = `translateX(${offset}px)`;
+            const slideWidth = track.firstElementChild ? track.firstElementChild.offsetWidth : 0;
+            const gap = 15; // mesmo valor do CSS
+            const offset = -(currentSlide * (slideWidth + gap));
+            track.style.transform = `translateX(${offset}px)`;
 
-    // Atualizar dots
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-    });
-}
+            // Atualizar dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
 
-function moveSlide(direction) {
-    const totalSlides = sliderImages.length;
-    const maxSlide = Math.max(0, totalSlides - slidesPerView);
-    
-    const previousSlide = currentSlide;
-    currentSlide += direction;
+        function moveSlide(direction) {
+            const totalSlides = sliderImages.length;
+            const maxSlide = Math.max(0, totalSlides - slidesPerView);
 
-    if (currentSlide < 0) {
-        currentSlide = maxSlide;
-    } else if (currentSlide > maxSlide) {
-        currentSlide = 0;
-    }
+            currentSlide += direction;
 
-    updateSlidePosition();
-    resetAutoSlide();
-}
+            if (currentSlide < 0) {
+                currentSlide = maxSlide;
+            } else if (currentSlide > maxSlide) {
+                currentSlide = 0;
+            }
+
+            updateSlidePosition();
+            resetAutoSlide();
+        }
 
         function goToSlide(index) {
             currentSlide = index;
