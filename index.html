@@ -1366,19 +1366,15 @@
         }
 
         function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
+            const grid = document.getElementById('galleryGrid');
 
-    if (galleryCategories.length === 0) {
-        grid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px; grid-column: 1/-1;">📷 Em breve adicionaremos fotos dos nossos trabalhos!</p>';
-        return;
-    }
+            if (galleryCategories.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px; grid-column: 1/-1;">📷 Em breve adicionaremos fotos dos nossos trabalhos!</p>';
+                return;
+            }
 
-    grid.innerHTML = galleryCategories.map(category => {
-        // Contar apenas imagens (sem vídeos) para índice correto
-        let imageOnlyIndex = 0;
-        
-        return `
-        <div class="gallery-category">
+            grid.innerHTML = galleryCategories.map(category => `
+            <div class="gallery-category">
             <div class="category-header" onclick="toggleCategory('${category.id}')">
                 <h3>${category.name}</h3>
                 <span class="category-count">${category.images.length} ${category.images.length === 1 ? 'item' : 'itens'}</span>
@@ -1386,8 +1382,8 @@
             </div>
             <div class="category-images" id="category-${category.id}">
                 ${category.images.map((item, index) => {
-                    if (item.type === 'video') {
-                        return `
+                if (item.type === 'video') {
+                    return `
                             <div class="gallery-item gallery-video-item" 
                                  onclick="openVideoFullscreen('${item.src}', '${item.caption}')"
                                  onmouseenter="playGalleryVideo(this)"
@@ -1405,20 +1401,19 @@
                                 <div class="video-play-overlay">▶️</div>
                             </div>
                         `;
-                    } else {
-                        return `
-                            <div class="gallery-item" onclick="openModal('${item.src}', '${item.caption}', '${category.id}')">
+                } else {
+                    return `
+                            <div class="gallery-item" onclick="openModal('${item.src}', '${item.caption}', '${category.id}', ${index})">
                                 <img src="${item.src}" alt="${item.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
                                 <div class="gallery-item-caption">${item.caption}</div>
                             </div>
                         `;
-                    }
-                }).join('')}
+                }
+            }).join('')}
             </div>
-        </div>
-    `;
-    }).join('');
-}
+                </div>
+            `).join('');
+        }
 
         function openModal(src, caption, categoryId = null) {
             const modal = document.getElementById('imageModal');
