@@ -668,53 +668,54 @@
                 bottom: 10px;
             }
         }
+
         /* Navegação por swipe no modal */
-.modal-nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10001;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
+        .modal-nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
 
-.modal-nav-arrow:hover {
-    background: white;
-    transform: translateY(-50%) scale(1.1);
-}
+        .modal-nav-arrow:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
 
-.modal-nav-arrow.left {
-    left: 20px;
-}
+        .modal-nav-arrow.left {
+            left: 20px;
+        }
 
-.modal-nav-arrow.right {
-    right: 20px;
-}
+        .modal-nav-arrow.right {
+            right: 20px;
+        }
 
-@media (max-width: 768px) {
-    .modal-nav-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-    }
-    
-    .modal-nav-arrow.left {
-        left: 10px;
-    }
-    
-    .modal-nav-arrow.right {
-        right: 10px;
-    }
-}
+        @media (max-width: 768px) {
+            .modal-nav-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .modal-nav-arrow.left {
+                left: 10px;
+            }
+
+            .modal-nav-arrow.right {
+                right: 10px;
+            }
+        }
 
         @media (max-width: 768px) {
             .header h1 {
@@ -1157,14 +1158,14 @@
         </div>
     </section>
 
-<!-- MODAL DE IMAGEM -->
-<div class="image-modal" id="imageModal" onclick="closeModalClick(event)">
-    <span class="modal-close">&times;</span>
-    <button class="modal-nav-arrow left" onclick="event.stopPropagation(); navigateModal(-1)">‹</button>
-    <img class="modal-content" id="modalImage">
-    <button class="modal-nav-arrow right" onclick="event.stopPropagation(); navigateModal(1)">›</button>
-    <div class="modal-caption" id="modalCaption"></div>
-</div>
+    <!-- MODAL DE IMAGEM -->
+    <div class="image-modal" id="imageModal" onclick="closeModalClick(event)">
+        <span class="modal-close">&times;</span>
+        <button class="modal-nav-arrow left" onclick="event.stopPropagation(); navigateModal(-1)">‹</button>
+        <img class="modal-content" id="modalImage">
+        <button class="modal-nav-arrow right" onclick="event.stopPropagation(); navigateModal(1)">›</button>
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
 
     <div class="container">
         <div class="header">
@@ -1364,15 +1365,15 @@
             }
         }
 
- function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
 
-    if (galleryCategories.length === 0) {
-        grid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px; grid-column: 1/-1;">📷 Em breve adicionaremos fotos dos nossos trabalhos!</p>';
-        return;
-    }
+            if (galleryCategories.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px; grid-column: 1/-1;">📷 Em breve adicionaremos fotos dos nossos trabalhos!</p>';
+                return;
+            }
 
-    grid.innerHTML = galleryCategories.map(category => `
+            grid.innerHTML = galleryCategories.map(category => `
         <div class="gallery-category">
             <div class="category-header" onclick="toggleCategory('${category.id}')">
                 <h3>${category.name}</h3>
@@ -1381,8 +1382,8 @@
             </div>
             <div class="category-images" id="category-${category.id}">
                 ${category.images.map((item, index) => {
-                    if (item.type === 'video') {
-                        return `
+                if (item.type === 'video') {
+                    return `
                             <div class="gallery-item gallery-video-item" 
                                  onclick="openVideoFullscreen('${item.src}', '${item.caption}')"
                                  onmouseenter="playGalleryVideo(this)"
@@ -1400,46 +1401,64 @@
                                 <div class="video-play-overlay">▶️</div>
                             </div>
                         `;
-                    } else {
-                        return `
+                } else {
+                    return `
                             <div class="gallery-item" onclick="openModal('${item.src}', '${item.caption}', '${category.id}', ${index})">
                                 <img src="${item.src}" alt="${item.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
                                 <div class="gallery-item-caption">${item.caption}</div>
                             </div>
                         `;
-                    }
-                }).join('')}
+                }
+            }).join('')}
             </div>
         </div>
     `).join('');
-}
-
-function openModal(src, caption, categoryId = null, imageIndex = 0) {
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
-
-    // Encontrar categoria e índice
-    if (categoryId) {
-        const category = galleryCategories.find(cat => cat.id === categoryId);
-        if (category) {
-            currentCategoryImages = category.images.filter(img => !img.type || img.type !== 'video');
-            currentModalIndex = imageIndex;
         }
-    }
 
-    modal.style.display = 'block';
-    modalImg.src = src;
-    modalCaption.textContent = caption;
-
-    document.body.style.overflow = 'hidden';
-}
-
-        function closeModal() {
+        function openModal(src, caption, categoryId = null) {
             const modal = document.getElementById('imageModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+
+            // Encontrar categoria e índice
+            if (categoryId) {
+                const category = galleryCategories.find(cat => cat.id === categoryId);
+                if (category) {
+                    // Pegar TODAS as imagens e vídeos
+                    currentCategoryImages = category.images;
+                    // Encontrar o índice correto do item clicado
+                    currentModalIndex = currentCategoryImages.findIndex(img => img.src === src);
+                    if (currentModalIndex === -1) currentModalIndex = 0;
+                }
+            } else {
+                currentCategoryImages = [{ src, caption }];
+                currentModalIndex = 0;
+            }
+
+            modal.style.display = 'block';
+            modalImg.src = src;
+            modalCaption.textContent = caption;
+
+            document.body.style.overflow = 'hidden';
         }
+
+function closeModal() {
+    const modalVideo = document.getElementById('modalVideo');
+    if (modalVideo) {
+        modalVideo.pause();
+        modalVideo.remove();
+    }
+    const modalImg = document.getElementById('modalImage');
+    modalImg.style.display = 'block';
+
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    
+    // Resetar arrays
+    currentCategoryImages = [];
+    currentModalIndex = 0;
+}
 
         // Fechar modal com tecla ESC
         document.addEventListener('keydown', (e) => {
@@ -1523,10 +1542,10 @@ function openModal(src, caption, categoryId = null, imageIndex = 0) {
         let searchTerm = '';
         let showAllServices = false;
         let showAllProducts = false;
-let currentModalIndex = 0;
-let currentCategoryImages = [];
-let touchStartX = 0;
-let touchEndX = 0;
+        let currentModalIndex = 0;
+        let currentCategoryImages = [];
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         // ==================== SLIDER DE TRABALHOS ====================
         // coloque na pasta guithub as imagens que quer que apareça nos ultimos trabalhos slides
@@ -1672,19 +1691,19 @@ let touchEndX = 0;
             setupSearch();
             renderGallery(); // <-- ADICIONAR ESTA LINHA
             // Adicionar suporte a swipe no modal
-const modal = document.getElementById('imageModal');
-modal.addEventListener('touchstart', handleTouchStart, false);
-modal.addEventListener('touchend', handleTouchEnd, false);
+            const modal = document.getElementById('imageModal');
+            modal.addEventListener('touchstart', handleTouchStart, false);
+            modal.addEventListener('touchend', handleTouchEnd, false);
 
-// Navegação por teclado
-document.addEventListener('keydown', (e) => {
-    const modal = document.getElementById('imageModal');
-    if (modal.style.display === 'block') {
-        if (e.key === 'ArrowLeft') navigateModal(-1);
-        if (e.key === 'ArrowRight') navigateModal(1);
-        if (e.key === 'Escape') closeModal();
-    }
-});
+            // Navegação por teclado
+            document.addEventListener('keydown', (e) => {
+                const modal = document.getElementById('imageModal');
+                if (modal.style.display === 'block') {
+                    if (e.key === 'ArrowLeft') navigateModal(-1);
+                    if (e.key === 'ArrowRight') navigateModal(1);
+                    if (e.key === 'Escape') closeModal();
+                }
+            });
         }
 
         function setupDateInput() {
@@ -2452,43 +2471,70 @@ document.addEventListener('keydown', (e) => {
         currentModalIndex = 0;
     }
     
-    const image = currentCategoryImages[currentModalIndex];
+    const item = currentCategoryImages[currentModalIndex];
+    const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const modalCaption = document.getElementById('modalCaption');
     
-    modalImg.src = image.src;
-    modalCaption.textContent = image.caption;
-}
-
-function closeModalClick(event) {
-    if (event.target.id === 'imageModal') {
-        closeModal();
+    // Remover vídeo anterior se existir
+    const oldVideo = document.getElementById('modalVideo');
+    if (oldVideo) {
+        oldVideo.pause();
+        oldVideo.remove();
+        modalImg.style.display = 'block';
     }
-}
-
-function handleTouchStart(e) {
-    touchStartX = e.changedTouches[0].screenX;
-}
-
-function handleTouchEnd(e) {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
     
-    if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-            // Swipe left - próxima imagem
-            navigateModal(1);
-        } else {
-            // Swipe right - imagem anterior
-            navigateModal(-1);
-        }
+    // Verificar se é vídeo ou imagem
+    if (item.type === 'video') {
+        // Criar elemento de vídeo
+        const videoElement = document.createElement('video');
+        videoElement.src = item.src;
+        videoElement.controls = true;
+        videoElement.autoplay = true;
+        videoElement.className = 'modal-content';
+        videoElement.id = 'modalVideo';
+
+        // Substituir imagem por vídeo
+        modalImg.style.display = 'none';
+        modalImg.parentNode.insertBefore(videoElement, modalImg);
+    } else {
+        // Mostrar imagem
+        modalImg.src = item.src;
+        modalImg.style.display = 'block';
     }
+    
+    modalCaption.textContent = item.caption;
 }
+
+        function closeModalClick(event) {
+            if (event.target.id === 'imageModal') {
+                closeModal();
+            }
+        }
+
+        function handleTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }
+
+        function handleTouchEnd(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - próxima imagem
+                    navigateModal(1);
+                } else {
+                    // Swipe right - imagem anterior
+                    navigateModal(-1);
+                }
+            }
+        }
 
         // ==================== INICIAR ====================
         init();
